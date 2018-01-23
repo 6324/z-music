@@ -1,0 +1,1 @@
+export const SET_SILIDING = 'SET_SILIDING'

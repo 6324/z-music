@@ -25,7 +25,7 @@
   import {Flexbox, FlexboxItem, Swiper} from 'vux'
   import Personalized from '../components/Personalized'
   import http from '../utils/http'
-
+  import {mapGetters} from 'vuex'
   export default {
     name: "main-music",
     data() {
@@ -38,9 +38,11 @@
       FlexboxItem,
       Swiper,
       Personalized
-    }, mounted() {
+    },
+    mounted() {
       this.init()
     },
+
     methods: {
 
       init() {

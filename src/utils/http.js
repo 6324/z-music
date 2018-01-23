@@ -1,11 +1,11 @@
 import axios from 'axios'
-import {Api} from "../config/api-config";
-import {Debug} from "../config/app";
+import {Api} from "../config/api";
+import appSetting from "../config/app";
 import log from '../utils/log'
 
 export const get = (url, params, method, ok, err) => {
 
-  if (Debug) {
+  if (appSetting.Debug) {
     log('访问网络：', method)
   }
 

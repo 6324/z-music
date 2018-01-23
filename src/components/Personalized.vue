@@ -2,7 +2,7 @@
   <div class="main">
     <div class="img" :style="{backgroundImage:'url(' + imgUrl + ')'}">
       <div class="play-count">
-        <icon :scale="1.5" name="head-set"></icon>
+        <icon :scale="1.5" style="margin-right: 2px" name="head-set"></icon>
         <p>{{numberConvert(playCount)}}</p></div>
     </div>
     <p class="name">{{name}}</p>
@@ -26,7 +26,7 @@
       },
       playCount: {
         type: Number,
-        default: 0,
+        default: 10000,
       },
     },
     methods: {
@@ -76,6 +76,7 @@
   }
 
   .play-count {
+
     height: 20px;
     display: -webkit-flex;
     flex-direction: row;
