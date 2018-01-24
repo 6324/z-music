@@ -1,6 +1,6 @@
 # z-music
 
-> A Vue.js project
+> 你看你🐴呐？
 
 ## Build Setup
 
