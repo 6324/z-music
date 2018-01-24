@@ -4,6 +4,8 @@ import MainMusic from '../view/MainMusic'
 import MainVideo from '../view/MainVideo'
 import MainDj from '../view/MainDj'
 
+import MainPersonalized from '../view/personalized/MainPersonalized'
+
 const main = {
   path: '/',
   name: 'index',
@@ -27,4 +29,12 @@ const main = {
   ]
 }
 
-export const routes = [main]
+const personalized = {
+
+  path: '/personalized/:id',
+  name: 'personalized',
+  component: MainPersonalized
+
+}
+
+export const routes = [main,personalized]

@@ -50,7 +50,7 @@
     flex-direction: column;
     height: 170px;
     width: 100%;
-    background-image: url("http://p1.music.126.net/u_Wld2y-mt6PqHfFoi9-4Q==/18731280092739313.jpg");
+    background-image: url("http://p1.music.126.net/ne_f5qC_dy-b_sJwuSK2JQ==/18870918068080912.jpg");
     background-size: 100% ;
     background-position: center;
   }

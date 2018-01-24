@@ -1,11 +1,14 @@
 <template>
   <div class="main">
-    <div class="img" :style="{backgroundImage:'url(' + imgUrl + ')'}">
-      <div class="play-count">
-        <icon :scale="1.5" style="margin-right: 2px" name="head-set"></icon>
-        <p>{{numberConvert(playCount)}}</p></div>
+    <div class="foo">
+      <div class="img" @click="getList(id)" :style="{backgroundImage:'url(' + imgUrl + ')',width:imgw,height:imgh}">
+        <div class="play-count">
+          <icon :scale="1.5" style="margin-right: 2px" name="head-set"></icon>
+
+          <p>{{numberConvert(playCount)}}</p></div>
+      </div>
+      <p v-if="name" class="name">{{name}}</p>
     </div>
-    <p class="name">{{name}}</p>
   </div>
 </template>
 
@@ -16,22 +19,36 @@
   export default {
     name: "personalized",
     props: {
+      id: {
+        type: Number
+      },
       imgUrl: {
         type: String,
-        default: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1516461632805&di=b75f413478a99ae2f620b68fa32cc890&imgtype=0&src=http%3A%2F%2Fres2.esf.leju.com%2Fesf_www%2Fstatics%2Fimages%2Fdefault-img%2Fdetail.png'
       },
       name: {
-        type: String,
-        default: '想起喜欢的人，冬天也变得温暖'
+        type: String
       },
       playCount: {
         type: Number,
         default: 10000,
       },
+      imgw: {
+        type: String,
+        default: '100px'
+      },
+      imgh: {
+        type: String,
+        default: '100px'
+      }
     },
     methods: {
       numberConvert(number) {
         return stirngUtil.numberConvert(number)
+      },
+      getList(id) {
+        if (id) {
+          this.$router.push({name: 'personalized', params: {'id': id}})
+        }
       }
     },
     components: {Flexbox, FlexboxItem}
@@ -41,21 +58,22 @@
 <style scoped>
   .main {
     display: -webkit-flex;
+    justify-content: center;
+    /*flex-grow: 1;*/
+    /*flex-basis:33.33%*/
+  }
+
+
+  .foo {
+    display: -webkit-flex;
     flex-direction: column;
-    text-align: left;
-    align-items: center;
-    width: 33.33%;
-    height: auto;
   }
 
   .img {
     display: -webkit-flex;
     flex-direction: row;
-    width: 100px;
-    height: 100px;
-    background-size: 100% 100%;
-
     justify-content: flex-end;
+    background-size: 100% 100%;
   }
 
   .name {

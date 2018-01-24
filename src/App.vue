@@ -18,11 +18,10 @@
 
   </div>
 </template>
-
 <script>
   import {Drawer, Loading, ViewBox} from 'vux'
   import MainSliding from "./components/MainSliding";
-  import {mapGetters} from 'vuex'
+
   export default {
     name: 'app',
     data() {
@@ -39,15 +38,13 @@
       ViewBox,
       MainSliding
     },
-    computed:{
-      slidingState:{
-        get(){
-          console.log('get'+this.$store.state.appConfig.slidingState)
+    computed: {
+      slidingState: {
+        get() {
           return this.$store.state.appConfig.slidingState
-        // ...mapGetters({slidingState: 'SlidingState'})
+          // ...mapGetters({slidingState: 'SlidingState'})
         },
-        set(value){
-          console.log('set')
+        set(value) {
           this.$store.commit('SET_SILIDING', !this.$store.state.appConfig.slidingState)
         }
       }
@@ -70,7 +67,9 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-
+  ::-webkit-scrollbar{
+    display:none;
+  }
   .icon {
     width: 1em;
     height: 1em;

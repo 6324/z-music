@@ -13,8 +13,8 @@
     </flexbox-item>
     <flexbox-item>
       <div class="gedan">
-        <personalized :key="items.id" v-for="items in personalizedList" :img-url="items.picUrl" :name="items.name" :playCount="items.playCount"></personalized>
-
+        <personalized :key="items.id" :style="{flexGrow:'1'}" v-for="items in personalizedList" :id="items.id" :img-url="items.picUrl"
+                      :name="items.name" :playCount="items.playCount"></personalized>
       </div>
 
     </flexbox-item>
@@ -65,7 +65,7 @@
 
         })
       },
-      getPersonalized() {//获取歌单
+      getPersonalized() {//获取歌单列表
         var _this = this
         http.get('personalized', {}, '歌单', function (data) {
          _this.personalizedList = data.result
@@ -84,6 +84,8 @@
 
   .gedan {
     display: -webkit-flex;
+    flex-direction: row;
+    justify-content:  center;
     flex-wrap: wrap;
 
   }

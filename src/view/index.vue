@@ -34,7 +34,6 @@
       </flexbox-item>
       <!--tab-e-->
       <router-view></router-view>
-      <button @click="getBanner">测试axios</button>
     </flexbox>
   </view-box></div>
 </template>
