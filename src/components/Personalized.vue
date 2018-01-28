@@ -1,12 +1,14 @@
 <template>
   <div class="main">
-    <div class="foo">
-      <div class="img" @click="getList(id)" :style="{backgroundImage:'url(' + imgUrl + ')',width:imgw,height:imgh}">
-        <div class="play-count">
-          <icon :scale="1.5" style="margin-right: 2px" name="head-set"></icon>
+    <div class="foo-per">
+      <transition name="fade">
+        <div class="img" @click="getList(id)" :style="{backgroundImage:'url(' + imgUrl + ')',width:imgw,height:imgh}">
+          <div class="play-count">
+            <icon :scale="1.5" style="margin-right: 2px" name="head-set"></icon>
 
-          <p>{{numberConvert(playCount)}}</p></div>
-      </div>
+            <p>{{numberConvert(playCount)}}</p></div>
+        </div>
+      </transition>
       <p v-if="name" class="name">{{name}}</p>
     </div>
   </div>
@@ -63,8 +65,7 @@
     /*flex-basis:33.33%*/
   }
 
-
-  .foo {
+  .foo-per {
     display: -webkit-flex;
     flex-direction: column;
   }

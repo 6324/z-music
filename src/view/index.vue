@@ -23,13 +23,13 @@
       <!--tab-s-->
       <flexbox-item>
         <div style="height: 40px;">
-          <sticky scroll-box="vux_view_box_body" :offset="0">
+          <!--<sticky scroll-box="vux_view_box_body" :offset="0">-->
             <tab class="tab" :active-color="'#bf1300'" :custom-bar-width="'50%'" :line-width="2">
-              <tab-item @on-item-click="selectTab('/music')" class="tab-item" selected>音乐</tab-item>
+              <tab-item @on-item-click="selectTab('/')" class="tab-item" selected>音乐</tab-item>
               <tab-item @on-item-click="selectTab('/vedio')" class="tab-item">视频</tab-item>
               <tab-item @on-item-click="selectTab('/dj')" class="tab-item">电台</tab-item>
             </tab>
-          </sticky>
+          <!--</sticky>-->
         </div>
       </flexbox-item>
       <!--tab-e-->

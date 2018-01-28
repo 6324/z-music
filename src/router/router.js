@@ -5,6 +5,7 @@ import MainVideo from '../view/MainVideo'
 import MainDj from '../view/MainDj'
 
 import MainPersonalized from '../view/personalized/MainPersonalized'
+import MusicIndex from '../view/music/MusicInfo'
 
 const main = {
   path: '/',
@@ -12,8 +13,8 @@ const main = {
   component: index,
   children: [
     {
-      path: '/music',
-      name: 'music',
+      path: '/',
+      name: 'main',
       component: MainMusic
     },
     {
@@ -37,4 +38,13 @@ const personalized = {
 
 }
 
-export const routes = [main,personalized]
+const music = {
+
+  path: '/music/:id',
+  name: 'music',
+  component: MusicIndex
+
+}
+
+
+export const routes = [main, personalized,music]
