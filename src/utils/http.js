@@ -13,8 +13,11 @@ export const get = (url, params, method, ok, err) => {
     method: 'get',
     url: Api.baseUrl.concat(url),
     params: params,
+    xhrFields: {
+      withCredentials: true
+    },
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
     timeout: 1000 * 10 //0表示无超时时间
   }

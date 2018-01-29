@@ -20,8 +20,7 @@
     name: "base-cd",
     props: {
       img: {
-        type: String,
-        default: '../assets/img/head.jpg'
+        type: String
       },
       state: {//播放状态
         type: Boolean,
@@ -33,7 +32,7 @@
 
 <style scoped>
   .cd {
-    top: 70px;
+    top: 105px;
     left: 0;
     bottom: 0;
     right: 0;
@@ -47,7 +46,7 @@
   }
 
   .bg {
-    top: 70px;
+    top: 105px;
     left: 0;
     bottom: 0;
     right: 0;
@@ -63,7 +62,7 @@
   .cd-img {
     margin: auto;
     position: absolute;
-    top: 70px;
+    top: 105px;
     left: 0;
     bottom: 0;
     right: 0;
@@ -86,7 +85,7 @@
   .cd-controller {
     position: absolute;
     margin: auto;
-    left: 49%;
+    left: 45%;
     top: -20px;
     width: 100px;
     height: 155px;

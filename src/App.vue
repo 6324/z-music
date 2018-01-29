@@ -10,11 +10,12 @@
       <div slot="drawer" style="width: 100%;height: 100%;">
         <main-sliding></main-sliding>
       </div>
-
-      <router-view style="height: 93%"></router-view>
+      <transition name="fade">
+        <router-view style="height: 93%"></router-view>
+      </transition>
       <div class="test" v-if="songList.length>0">
         <!--<p>{{music.name}}</p>-->
-        <audio style="width: 100%; background-color: #fff" @pause="pause" autoplay @play="play" id="audio"
+        <audio v-if="false" style="width: 100%; background-color: #fff" @pause="pause" autoplay @play="play" id="audio"
                :src="currentMusic.url" controls="controls">
         </audio>
       </div>
@@ -91,7 +92,7 @@
   }
 
   .test {
-    box-shadow: 0px 3px 20px 0px rgba(177, 177, 177, 0.51);
+    /*box-shadow: 0px 3px 20px 0px rgba(177, 177, 177, 0.51);*/
     width: 100%;
     height: 7%;
     position: absolute; /*这里一定要设置*/
@@ -99,7 +100,7 @@
     -webkit-transition: .5s ease-in-out; /* css的transition允许css的属性值在一定的时间内从一个状态平滑的过渡到另一个状态 */
     -moz-transition: .5s ease-in-out; /*这里为了兼容其他浏览器*/
     -o-transition: .5s ease-in-out;
-    background-color: rgba(255, 255, 255, 0.36);
+    /*background-color: rgba(255, 255, 255, 0.36);*/
   }
 
   body {
