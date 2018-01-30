@@ -3,8 +3,9 @@
     <flexbox-item>
       <swiper :list="swiperList"
               :loop="true"
-              auto
+              :auto="true"
               dots-class="custom-bottom"
+              :aspect-ratio="0.38"
               dots-position="right"></swiper>
     </flexbox-item>
     <flexbox-item class="main">
@@ -13,7 +14,8 @@
     </flexbox-item>
     <flexbox-item>
       <div class="gedan">
-        <personalized :key="items.id" :style="{flexGrow:'1'}" v-for="items in personalizedList" :id="items.id" :img-url="items.picUrl"
+        <personalized :key="items.id" :style="{flexGrow:'1'}" v-for="items in personalizedList" :id="items.id"
+                      :img-url="items.picUrl"
                       :name="items.name" :playCount="items.playCount"></personalized>
       </div>
 
@@ -26,6 +28,7 @@
   import Personalized from '../components/Personalized'
   import http from '../utils/http'
   import {mapGetters} from 'vuex'
+
   export default {
     name: "main-music",
     data() {
@@ -58,7 +61,6 @@
             let banner = {}
             banner.url = 'javascript:'
             banner.img = banners[i].pic
-            banner.title = banners[i].typeTitle
             _this.swiperList.push(banner)
           }
         }, function (err) {
@@ -68,7 +70,7 @@
       getPersonalized() {//获取歌单列表
         var _this = this
         http.get('personalized', {}, '歌单', function (data) {
-         _this.personalizedList = data.result
+          _this.personalizedList = data.result
         }, function (err) {
 
         })
@@ -82,10 +84,11 @@
     display: -webkit-flex;
   }
 
+
   .gedan {
     display: -webkit-flex;
     flex-direction: row;
-    justify-content:  center;
+    justify-content: center;
     flex-wrap: wrap;
 
   }

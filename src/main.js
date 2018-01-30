@@ -10,12 +10,17 @@ import store from './store'
 import Icon from 'vue-svg-icon/Icon.vue'
 import appSetting from "./config/app";
 import {LoadingPlugin} from 'vux'
+import {Slider} from 'iview';
+import 'iview/dist/styles/iview.css';
+import './assets/less/index.less';
+
+Vue.component('Slider', Slider);
 Vue.component('icon', Icon)
 
 Vue.use(VueRouter)
 Vue.use(LoadingPlugin)
 Vue.use(vuex)
-appSetting.Debug=true
+appSetting.Debug = true
 
 FastClick.attach(document.body)
 Vue.config.productionTip = false

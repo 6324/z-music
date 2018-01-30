@@ -1,6 +1,9 @@
 <template>
   <div id="app" style="height: 100%">
-    <loading :show="false" :name="'fade'" :text="'加载中'"></loading>
+    <loading :show="false" :name="'fade'"  :text="'加载中'"></loading>
+    <audio style="display: none"  id="audio" autoplay
+           :src="currentMusic.url" controls="controls">
+    </audio>
     <drawer
       :show.sync="slidingState"
       :show-mode="showModeValue"
@@ -10,14 +13,16 @@
       <div slot="drawer" style="width: 100%;height: 100%;">
         <main-sliding></main-sliding>
       </div>
-      <transition name="fade">
-        <router-view style="height: 93%"></router-view>
-      </transition>
-      <div class="test" v-if="songList.length>0">
-        <!--<p>{{music.name}}</p>-->
-        <audio v-if="false" style="width: 100%; background-color: #fff" @pause="pause" autoplay @play="play" id="audio"
-               :src="currentMusic.url" controls="controls">
-        </audio>
+      <div :class="[{'no-music':!SongState},{'has-music':SongState}]">
+        <router-view></router-view>
+      </div>
+      <div id="music-bar" v-if="SongState">
+        <div
+          :style="{backgroundImage:'url('+currentMusic.img+')',height:'40px',width:'40px' ,backgroundSize:'100% 100%'}"></div>
+        <div class="bar-music-name">
+          <p style="color: black;font-size: 13px">{{currentMusic.name}}</p>
+          <p style="color: #585858;font-size: 10px">{{currentMusic.author}}</p>
+        </div>
       </div>
     </drawer>
 
@@ -68,14 +73,6 @@
 
     methods: {
       ...mapActions(['setSongState']),
-      pause() {
-        console.log('播放暂停')
-        this.setSongState(false)
-      },
-      play() {
-        console.log('播放开始')
-        this.setSongState(true)
-      },
 
 
     }
@@ -91,16 +88,15 @@
     overflow-x: hidden;
   }
 
-  .test {
-    /*box-shadow: 0px 3px 20px 0px rgba(177, 177, 177, 0.51);*/
+
+  #music-bar {
+    box-shadow: 0px 3px 20px 0px rgba(177, 177, 177, 0.51);
     width: 100%;
-    height: 7%;
-    position: absolute; /*这里一定要设置*/
-    z-index: 999999; /*这里是该元素与显示屏的距离，据说越大越好，但是我也没有看到效果，因为没有它也是可以的*/
-    -webkit-transition: .5s ease-in-out; /* css的transition允许css的属性值在一定的时间内从一个状态平滑的过渡到另一个状态 */
-    -moz-transition: .5s ease-in-out; /*这里为了兼容其他浏览器*/
-    -o-transition: .5s ease-in-out;
-    /*background-color: rgba(255, 255, 255, 0.36);*/
+    height: 50px;
+    padding: 5px 20px 5px 20px;
+    background-color: #fff;
+    display: -webkit-flex;
+    align-items: center;
   }
 
   body {
@@ -111,6 +107,18 @@
 
   ::-webkit-scrollbar {
     display: none;
+  }
+
+  .no-music {
+    height: 100%;
+  }
+
+  .has-music {
+    height: 93%;
+  }
+
+  .bar-music-name {
+    margin-left: 10px;
   }
 
   .icon {

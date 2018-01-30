@@ -5,14 +5,14 @@ const state = {
   slidingState: false,//侧滑菜单状态
   songList: [1220480,],
   currentMusic: {
-    id: '1220480',
-    img: '',
-    name: '',
-    author: '',
-    url: 'http://m10.music.126.net/20180128000028/8345f6596005482687f1c4cbeb99e950/ymusic/12dd/b145/d777/4934080970ddff491503fbc35920da9c.mp3',
+    id: '210434',
+    img: 'http://p1.music.126.net/SOvBoGj5Bt4B3qQkKxW7eQ==/6668538022517929.jpg?param=130y130',
+    name: '被遗忘的时光',
+    author: '蔡琴',
+    url: 'http://music.163.com/song/media/outer/url?id=210434.mp3 ',
     size: 0,
   },//当前播放中/暂停中的音乐
-  songState: false,//当前音乐的播放状态
+  songState: true,//当前音乐的播放状态
 }
 
 const getters = {
@@ -48,7 +48,8 @@ const mutations = {
     state.slidingState = isShow
   },
   [types.GET_SONG_INFO](state, data) {
-    state.currentMusic.url = data.data[0].url
+    console.log(data)
+    state.currentMusic.url = 'http://music.163.com/song/media/outer/url?id='+data.data[0].id+'.mp3'
     state.currentMusic.size = data.data[0].size
   },
 
