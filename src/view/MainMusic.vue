@@ -1,7 +1,7 @@
 <template>
   <flexbox :orient="'vertical'" :gutter="0">
     <flexbox-item>
-      <swiper :list="swiperList"
+      <swiper :list="banners"
               :loop="true"
               :auto="true"
               dots-class="custom-bottom"
@@ -14,7 +14,7 @@
     </flexbox-item>
     <flexbox-item>
       <div class="gedan">
-        <personalized :key="items.id" :style="{flexGrow:'1'}" v-for="items in personalizedList" :id="items.id"
+        <personalized :key="items.id" :style="{flexGrow:'1'}" v-for="items in personalizeds" :id="items.id"
                       :img-url="items.picUrl"
                       :name="items.name" :playCount="items.playCount"></personalized>
       </div>
@@ -26,15 +26,13 @@
 <script>
   import {Flexbox, FlexboxItem, Swiper} from 'vux'
   import Personalized from '../components/Personalized'
-  import http from '../utils/http'
-  import {mapGetters} from 'vuex'
+  import {mapGetters, mapActions} from 'vuex'
 
   export default {
     name: "main-music",
     data() {
       return {
-        swiperList: [],
-        personalizedList: []
+        swiperList: []
       }
     }, components: {
       Flexbox,
@@ -45,36 +43,16 @@
     mounted() {
       this.init()
     },
-
+    computed: {
+      ...mapGetters({banners: 'GetBanner'}),
+      ...mapGetters({personalizeds: 'GetPersonalized'})
+    },
     methods: {
-
+      ...mapActions(['setBanners', 'setPersonalizeds']),
       init() {
-        this.getBanner()
-        this.getPersonalized()
+        this.setBanners()
+        this.setPersonalizeds()
       },
-
-      getBanner() {
-        var _this = this
-        http.get('banner', {}, 'banner', function (data) {
-          let banners = data.banners
-          for (var i = 0; i < banners.length; i++) {
-            let banner = {}
-            banner.url = 'javascript:'
-            banner.img = banners[i].pic
-            _this.swiperList.push(banner)
-          }
-        }, function (err) {
-
-        })
-      },
-      getPersonalized() {//获取歌单列表
-        var _this = this
-        http.get('personalized', {}, '歌单', function (data) {
-          _this.personalizedList = data.result
-        }, function (err) {
-
-        })
-      }
     }
   }
 </script>
@@ -83,7 +61,6 @@
   .main {
     display: -webkit-flex;
   }
-
 
   .gedan {
     display: -webkit-flex;

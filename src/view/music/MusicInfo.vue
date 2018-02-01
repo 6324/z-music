@@ -51,11 +51,16 @@
           <flexbox :gutter="0" :orient="'vertical'" :justify="'space-between'">
             <flexbox-item style="">
               <flexbox :gutter="0" style="padding: 0 5% 0 5%;color: white;">
-                22:10
+                {{currentMusic.f1}}
                 <flexbox-item style="height: 30px; width: 100%;padding:0 10px 0 10px;">
-                  <Slider style="margin-bottom: 10px" v-model="value9"></Slider>
+                  <Slider style="margin-bottom: 10px" :tip-format="hideFormat" @on-change="skip"
+                          :value="currentMusic.currentTime"
+                          :max="currentMusic.duration"></Slider>
+
+                  <!--<Slider style="margin-bottom: 10px"  @on-change="test"  :max="100"></Slider>-->
+                  <!--<Slider style="margin-bottom: 10px"  @on-input="test"  :max="100"></Slider>-->
                 </flexbox-item>
-                60:00
+                {{currentMusic.f2}}
               </flexbox>
             </flexbox-item>
             <flexbox-item style="width: 100%;height: 80px;margin-top: 10px">
@@ -91,12 +96,17 @@
   import {Flexbox, FlexboxItem, Range} from 'vux'
   import BaseCd from '../../components/BaseCd'
   import {mapGetters, mapActions} from 'vuex'
+  import stringUtil from '../../utils/string'
 
   export default {
     name: "music-info",
     data() {
       return {
-        value9: 25,
+        cvalue: 0,
+        hideFormat() {
+          return null
+          // return stringUtil.timeFormat(this.currentMusic.currentTime)
+        }
       }
     },
     components: {
@@ -107,38 +117,86 @@
     },
     computed: {
       ...mapGetters({songState: 'SongState'}),
-      ...mapGetters({currentMusic: 'Music'})
+      ...mapGetters({currentMusic: 'SongInfo'}),
+
     },
     mounted() {
+      //初始化音乐长度
       this.init()
     },
-    destroyed(){
-      // var musicBar = document.getElementById('music-bar');
-      // console.log('显示')
-      // musicBar.style.display='-webkit-flex'
+    destroyed() {
+      var musicBar = document.getElementById('music-bar');
+      musicBar.style.display = ''
     },
     methods: {
+
+      test(a){
+       console.log(a)
+      },
       ...mapActions(['setSongState']),
       format(val) {
         return 'Progress: ' + val + '%';
       },
       init() {
-        // var musicBar = document.getElementById('music-bar');
-        // musicBar.style.display='none'
-      },
+        //此界面不显示底部的bar
+        var musicBar = document.getElementById('music-bar');
+        musicBar.style.display = 'none'
 
+        this.addEventListeners()
+      },
+      ...mapActions(['setMusicLenth']),
       play() {
+        var audio = document.getElementById('audio');
         if (!this.songState) {
-          var audio = document.getElementById('audio');
-          console.log(audio)
           audio.play();
           this.setSongState(true)
         } else {
-          var audio = document.getElementById('audio');
-          console.log(audio)
           audio.pause();
           this.setSongState(false)
         }
+      },
+      addEventListeners: function () {
+        var audio = document.getElementById('audio');
+        const self = this;
+        audio.addEventListener('timeupdate', self._currentTime)
+        audio.addEventListener('canplay', self._durationTime)
+      },
+      removeEventListeners: function () {
+        var audio = document.getElementById('audio');
+        const self = this;
+        audio.removeEventListener('timeupdate', self._currentTime)
+        audio.removeEventListener('canplay', self._durationTime)
+      },
+      _currentTime: function () {
+        var audio = document.getElementById('audio');
+
+        let data = {
+          currentTime: parseInt(audio.currentTime),
+          duration: parseInt(audio.duration)
+        }
+        this.setMusicLenth(data)
+      },
+      _durationTime: function () {
+        var audio = document.getElementById('audio');
+
+        let data = {
+          currentTime: parseInt(audio.currentTime),
+          duration: parseInt(audio.duration)
+        }
+        this.setMusicLenth(data)
+      },
+      skip(v) {
+        console.log(v)
+        var audio = document.getElementById('audio');
+        let data = {
+          currentTime: parseInt(v),
+          duration: parseInt(audio.duration)
+        }
+        this.setMusicLenth(data)
+
+        this.cvalue = v
+        audio.currentTime = this.currentMusic.currentTime
+
       }
     }
   }
@@ -199,7 +257,7 @@
   }
 
   .author {
-    color: #d9d9d9;
+    color: #fbfbfb;
     font-size: 10px;
     overflow: hidden;
     text-overflow: ellipsis;

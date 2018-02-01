@@ -166,13 +166,10 @@
 
         })
       },
-      ...mapActions(['getMusic']),
-      ...mapActions(['setMusic']),
+      ...mapActions(['setSongInfo']),
       play(id, img,name,author) {
         this.$router.push({name: 'music', params: {'id': id}})
-        this.setMusic({img,name,author})
-        this.getMusic(id)
-
+        this.setSongInfo(id)
       }
     }
   }

@@ -1,7 +1,7 @@
 <template>
   <div id="app" style="height: 100%">
-    <loading :show="false" :name="'fade'"  :text="'加载中'"></loading>
-    <audio style="display: none"  id="audio" autoplay
+    <loading :show="isLoding" loading=false></loading>
+    <audio ref="audio" style="display: none" id="audio" autoplay
            :src="currentMusic.url" controls="controls">
     </audio>
     <drawer
@@ -16,7 +16,7 @@
       <div :class="[{'no-music':!SongState},{'has-music':SongState}]">
         <router-view></router-view>
       </div>
-      <div id="music-bar" v-if="SongState">
+      <div id="music-bar" @click="toMusicInfo" v-if="SongState">
         <div
           :style="{backgroundImage:'url('+currentMusic.img+')',height:'40px',width:'40px' ,backgroundSize:'100% 100%'}"></div>
         <div class="bar-music-name">
@@ -49,20 +49,28 @@
       ViewBox,
       MainSliding
     },
+    mounted() {
+      this.initMusic()
+    },
     computed: {
       slidingState: {
         get() {
           return this.$store.state.appConfig.slidingState
-          // ...mapGetters({slidingState: 'SlidingState'})
         },
         set(value) {
           this.$store.commit('SET_SILIDING', !this.$store.state.appConfig.slidingState)
         }
+      }, isLoding: {
+        get() {
+          return this.$store.state.appConfig.isLoading
+        },
+        set(value) {
+          this.$store.commit('SET_LOADING', !this.$store.state.appConfig.isLoading)
+        }
       },
       ...mapGetters({songList: 'SongList'}),
-      ...mapGetters({currentMusic: 'Music'}),
-      ...mapGetters({SongState: 'Music'}),
-
+      ...mapGetters({currentMusic: 'SongInfo'}),
+      ...mapGetters({SongState: 'SongState'}),
 
     },
     watch: {
@@ -73,7 +81,12 @@
 
     methods: {
       ...mapActions(['setSongState']),
-
+      ...mapActions(['setMusicLenth']),
+      toMusicInfo() {
+        this.$router.push({name: 'music', params: {'id': this.currentMusic.id}})
+      },
+      initMusic() {
+      },
 
     }
   }
@@ -87,7 +100,6 @@
     width: 100%;
     overflow-x: hidden;
   }
-
 
   #music-bar {
     box-shadow: 0px 3px 20px 0px rgba(177, 177, 177, 0.51);
