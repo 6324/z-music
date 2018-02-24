@@ -20,7 +20,7 @@
 
                 </flexbox-item>
                 <flexbox-item class="toobar-menu-right" :span="2">
-                  <icon :scale="3" class="toolbar-menu-5" name="search"></icon>
+                  <icon :scale="3" class="toolbar-menu-5" @click.native="routerPush('/search')" name="search"></icon>
                 </flexbox-item>
               </flexbox>
 
@@ -170,6 +170,9 @@
       play(id, img,name,author) {
         this.$router.push({name: 'music', params: {'id': id}})
         this.setSongInfo(id)
+      },
+      routerPush(val){
+        this.$router.push(val)
       }
     }
   }

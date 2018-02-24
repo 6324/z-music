@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import appConfig from './modules/appConfig'
 import search from './modules/search'
+import fpcy from './modules/fpcy'
 import music from './modules/music'
 import main from './modules/main'
 
@@ -13,6 +14,7 @@ export default new Vuex.Store({
       main,
       music,
       search,
+      fpcy
     }
   }
 )

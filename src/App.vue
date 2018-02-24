@@ -13,10 +13,10 @@
       <div slot="drawer" style="width: 100%;height: 100%;">
         <main-sliding></main-sliding>
       </div>
-      <div :class="[{'no-music':!SongState},{'has-music':SongState}]">
+      <div :class="[{'no-music':currentMusic.id===''},{'has-music':currentMusic.id!=''}]">
         <router-view></router-view>
       </div>
-      <div id="music-bar" @click="toMusicInfo" v-if="SongState">
+      <div id="music-bar" @click="toMusicInfo" v-if="currentMusic.id!=''">
         <div
           :style="{backgroundImage:'url('+currentMusic.img+')',height:'40px',width:'40px' ,backgroundSize:'100% 100%'}"></div>
         <div class="bar-music-name">
@@ -102,9 +102,9 @@
   }
 
   #music-bar {
-    box-shadow: 0px 3px 20px 0px rgba(177, 177, 177, 0.51);
+    box-shadow: 0px 3px 20px 0px rgba(145, 145, 145, 0.51);
     width: 100%;
-    height: 50px;
+    height: 7%;
     padding: 5px 20px 5px 20px;
     background-color: #fff;
     display: -webkit-flex;
@@ -118,7 +118,7 @@
   }
 
   ::-webkit-scrollbar {
-    display: none;
+    /*display: none;*/
   }
 
   .no-music {

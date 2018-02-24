@@ -7,7 +7,7 @@ import log from '../utils/log'
 const router = new VueRouter({routes})
 router.beforeEach((to, from, next) => {
   if (app.Debug) {
-    log('路由', '去：' + to.path)
+    // log('路由', '去：' + to.path)
   }
   // var musicBar = document.getElementById('music-bar');
   // console.log(musicBar)

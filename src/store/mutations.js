@@ -15,4 +15,5 @@ export const SET_SONG_STATE = 'SET_SONG_STATE'//设置歌曲状态 播放/暂停
 export const GET_SONG_STATE = 'GET_SONG_STATE'//获取歌曲状态 播放/暂停
 
 export const SEARCH = 'SEARCH'//搜索
+export const FPCY = 'FPCY'//发票查验
 

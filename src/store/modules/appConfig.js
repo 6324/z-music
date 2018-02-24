@@ -26,7 +26,6 @@ const mutations = {
     state.slidingState = isShow
   },
   [types.SET_LOADING](state, isLoding) {
-    console.log('loading--->' + isLoding)
     state.isLoading = isLoding
   },
 

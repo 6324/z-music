@@ -37,12 +37,6 @@ const actions = {
   setSongState: ({commit}, isPlay) => {
     commit(types.SET_SONG_STATE, isPlay)
   },
-  // searchSong: ({commit}, keyword) => {//设置音乐信息
-  //   http.get('search', {keywords: keyword}, '获取音乐详情', function (data) {
-  //     commit(types.SET_SONG_INFO, data)
-  //   }, function (err) {
-  //   })
-  // },
 }
 const mutations = {
   [types.SET_SONG_INFO](state, obj) {

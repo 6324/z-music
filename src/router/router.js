@@ -7,6 +7,8 @@ import MainDj from '../view/MainDj'
 import MainPersonalized from '../view/personalized/MainPersonalized'
 import MusicIndex from '../view/music/MusicInfo'
 import SearchMain from '../view/search/SearchMain'
+import XsIndex from '../view/xs/XsIndex'
+import Fpcy from '../view/fpcy/fpcy'
 
 const main = {
   path: '/',
@@ -48,6 +50,16 @@ const music = {
   name: 'music',
   component: MusicIndex
 }
+const xsMain = {
+  path: '/xs',
+  name: 'xs',
+  component: XsIndex
+}
+const fpcy = {
+  path: '/fpcy',
+  name: 'fpcy',
+  component: Fpcy
+}
 
 
-export const routes = [main, personalized, music, search]
+export const routes = [main, personalized, music, search, xsMain, fpcy]

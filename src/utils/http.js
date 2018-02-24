@@ -11,7 +11,7 @@ export const get = function (url, params, method, ok, err) {
   }
 
   if (appSetting.Debug) {
-    log('访问网络：', method)
+    // log('访问网络：', method)
   }
 
   let config = {
